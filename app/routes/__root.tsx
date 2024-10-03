@@ -2,6 +2,7 @@ import { createRootRoute } from '@tanstack/react-router'
 import { Outlet, ScrollRestoration } from '@tanstack/react-router'
 import { Body, Head, Html, Meta, Scripts } from '@tanstack/start'
 import * as React from 'react'
+import { ThemeProvider } from '../components/theme-provider'
 
 export const Route = createRootRoute({
   meta: () => [
@@ -33,11 +34,13 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       <Head>
         <Meta />
       </Head>
-      <Body>
-        {children}
-        <ScrollRestoration />
-        <Scripts />
-      </Body>
+      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+        <Body>
+          {children}
+          <ScrollRestoration />
+          <Scripts />
+        </Body>
+      </ThemeProvider>
     </Html>
   )
 }
